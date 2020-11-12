@@ -1,1 +1,4 @@
-# flask-exchange-rate
+## run
+```bash
+$ docker-compose up
+```
