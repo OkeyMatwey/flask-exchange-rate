@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+
+  server: &server
+    build: ./
+    image: flask_soap
+    depends_on:
+      - redis
+    volumes:
+      - .:/app
+    ports:
+      - 80:5000
+    command: flask run --host=0.0.0.0
+
+  redis:
+    image: redis:latest
+    volumes:
+      - .:/data
+
+  celeryworker:
+    <<: *server
+    image: flask_soap
+    depends_on:
+      - server
+    ports: []
+    command: celery -A main.celery worker -l INFO
