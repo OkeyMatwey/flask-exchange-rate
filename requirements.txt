@@ -1,5 +1,6 @@
 flask
 celery
-xml
+requests
 SQLAlchemy
 flask_sqlalchemy
+redis

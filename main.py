@@ -74,6 +74,9 @@ def get():
 
 @app.route('/look/')
 def look():
-    date = datetime.datetime.strptime(request.args.get('date'), "%Y-%m-%d")
+    try:
+        date = datetime.datetime.strptime(request.args.get('date'), "%Y-%m-%d")
+    except:
+        return render_template("index.html", look=True, response=False)
     query = Data.query.filter_by(Date=date.strftime("%d.%m.%Y"))
     return render_template("index.html", look=True, response=False, query=query)
